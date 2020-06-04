@@ -10,7 +10,7 @@ st.markdown("### This application is a streamlit dashboard that can used to anal
 
 @st.cache(persist=True)
 def load_data(nrows):
-    data = pd.read_excel(DATA_URL,nrows=nrows,parse_dates=[['CRASH_DATE','CRASH_TIME']])
+    data = pd.read_csv(DATA_URL,nrows=nrows,parse_dates=[['CRASH_DATE','CRASH_TIME']])
     data.dropna(subset=['LATITUDE','LONGITUDE'],inplace=True)
     lowercase=lambda x: str(x).lower()
     data.rename(lowercase,axis='columns',inplace=True)
@@ -18,7 +18,7 @@ def load_data(nrows):
     data.rename(columns={'crash_date_crash_time':'date/time'},inplace=True)
     return data
 
-data = load_data(42000)
+data = load_data(51000)
 original_data=data
 
 st.header("Where are the most people injured in NYC?")
